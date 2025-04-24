@@ -1,1 +1,1 @@
-!wget https://huggingface.co/seungheondoh/lp-music-caps/resolve/main/transfer.pth
+wget https://huggingface.co/seungheondoh/lp-music-caps/resolve/main/transfer.pth
