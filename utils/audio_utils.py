@@ -21,6 +21,41 @@ import soundfile as sf
 import itertools
 from numpy.fft import irfft
 
+def _resample_load_ffmpeg(path: str, sample_rate: int, downmix_to_mono: bool) -> Tuple[np.ndarray, int]:
+    """
+    Decoding, downmixing, and downsampling by librosa.
+    Returns a channel-first audio signal.
+
+    Args:
+        path:
+        sample_rate:
+        downmix_to_mono:
+
+    Returns:
+        (audio signal, sample rate)
+    """
+
+    def _decode_resample_by_ffmpeg(filename, sr):
+        """decode, downmix, and resample audio file"""
+        channel_cmd = '-ac 1 ' if downmix_to_mono else ''  # downmixing option
+        resampling_cmd = f'-ar {str(sr)}' if sr else ''  # downsampling option
+        cmd = f"ffmpeg -i \"{filename}\" {channel_cmd} {resampling_cmd} -f wav -"
+        p = subprocess.Popen(cmd, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        out, err = p.communicate()
+        return out
+
+    src, sr = sf.read(io.BytesIO(_decode_resample_by_ffmpeg(path, sr=sample_rate)))
+    return src.T, sr
+
+
+def _resample_load_librosa(path: str, sample_rate: int, downmix_to_mono: bool, **kwargs) -> Tuple[np.ndarray, int]:
+    """
+    Decoding, downmixing, and downsampling by librosa.
+    Returns a channel-first audio signal.
+    """
+    src, sr = librosa.load(path, sr=sample_rate, mono=downmix_to_mono, **kwargs)
+    return src, sr
+    
 def load_audio(
     path: str or Path,
     ch_format: str,
