@@ -40,7 +40,7 @@ mkdir -p "$OUTPUT_DIR"
 echo -e "${YELLOW}Checking if $MUSIC2TXT_MODEL already exists...${NC}"
 if [ ! -f "$MUSIC2TXT_MODEL" ]; then
   echo -e "${YELLOW}Starting file download...${NC}"
-  wget "$URL_MUSIC2TXT_MODEL" -O "$OUTPUT_DIR/$MUSIC2TXT_MODEL -nv"
+  wget "$URL_MUSIC2TXT_MODEL" -O "$OUTPUT_DIR/$MUSIC2TXT_MODEL" -nv
   if [ $? -eq 0 ]; then
     echo -e "${GREEN}File downloaded successfully as $MUSIC2TXT_MODEL.${NC}"
   else
@@ -53,7 +53,7 @@ fi
 echo -e "${YELLOW}Checking if $TXT2IMG_MODEL already exists...${NC}"
 if [ ! -f "$TXT2IMG_MODEL" ]; then
   echo -e "${YELLOW}Starting file download...${NC}"
-  wget "$URL_TXT2IMG_MODEL" -O "$OUTPUT_DIR/$TXT2IMG_MODEL -nv"
+  wget "$URL_TXT2IMG_MODEL" -O "$OUTPUT_DIR/$TXT2IMG_MODEL" -nv
   if [ $? -eq 0 ]; then
     echo -e "${GREEN}File downloaded successfully as $TXT2IMG_MODEL.${NC}"
   else
