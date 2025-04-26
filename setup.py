@@ -2,7 +2,6 @@ from setuptools import setup
 
 setup(
     name="musyn",
-    #packages=["lpmc"],
     install_requires=[
         'librosa >= 0.8',
         'torchaudio_augmentations==0.2.1', # for augmentation
@@ -23,6 +22,8 @@ setup(
         'evaluate==0.4.0',
         'bert_score==0.3.13',
         'rouge_score==0.1.2',
-        'gradio'
+        'gradio',
+        'peft==0.10.0',
+        'diffusers==0.30'
     ]
 )
