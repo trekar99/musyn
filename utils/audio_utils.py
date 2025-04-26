@@ -14,6 +14,8 @@ import subprocess
 from typing import Tuple
 from pathlib import Path
 
+from torch import from_numpy
+
 # import librosa
 import numpy as np
 import soundfile as sf
@@ -105,3 +107,23 @@ def load_audio(
     #     return src, sr
     # else:
     #     return src.T, sr
+  
+
+def get_audio(audio_path, duration=10, target_sr=16000):
+    n_samples = int(duration * target_sr)
+    audio, sr = load_audio(
+        path= audio_path,
+        ch_format= STR_CH_FIRST,
+        sample_rate= target_sr,
+        downmix_to_mono= True,
+    )
+    if len(audio.shape) == 2:
+        audio = audio.mean(0, False)  # to mono
+    input_size = int(n_samples)
+    if audio.shape[-1] < input_size:  # pad sequence
+        pad = np.zeros(input_size)
+        pad[: audio.shape[-1]] = audio
+        audio = pad
+    ceil = int(audio.shape[-1] // n_samples)
+    audio = from_numpy(np.stack(np.split(audio[:ceil * n_samples], ceil)).astype('float16'))# 32--> 16
+    return audio
