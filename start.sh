@@ -15,7 +15,7 @@ URL_TXT2IMG_MODEL="https://huggingface.co/stabilityai/sdxl-turbo/resolve/main/sd
 MUSIC2TXT_MODEL="lpmusiccaps.pth" 
 TXT2IMG_MODEL="sdxlturbo.safetensors"
 
-OUTPUT_DIR="assets/models"
+OUTPUT_DIR="model/models"
 
 
 # Installation with pip
@@ -38,7 +38,7 @@ echo -e "${YELLOW}Checking and creating the download directory if needed...${NC}
 mkdir -p "$OUTPUT_DIR"
 
 echo -e "${YELLOW}Checking if $MUSIC2TXT_MODEL already exists...${NC}"
-if [ ! -f "$MUSIC2TXT_MODEL" ]; then
+if [ ! -f "$OUTPUT_DIR/$MUSIC2TXT_MODEL" ]; then
   echo -e "${YELLOW}Starting file download...${NC}"
   wget "$URL_MUSIC2TXT_MODEL" -O "$OUTPUT_DIR/$MUSIC2TXT_MODEL" -nv
   if [ $? -eq 0 ]; then
@@ -51,7 +51,7 @@ else
 fi
 
 echo -e "${YELLOW}Checking if $TXT2IMG_MODEL already exists...${NC}"
-if [ ! -f "$TXT2IMG_MODEL" ]; then
+if [ ! -f "$OUTPUT_DIR/$TXT2IMG_MODEL" ]; then
   echo -e "${YELLOW}Starting file download...${NC}"
   wget "$URL_TXT2IMG_MODEL" -O "$OUTPUT_DIR/$TXT2IMG_MODEL" -nv
   if [ $? -eq 0 ]; then
