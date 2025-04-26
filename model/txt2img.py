@@ -14,7 +14,7 @@ class ImageGenerator():
   def __init__(self):
     self.model_config_path = self.get_model_config()
 
-    self.pipeline = StableDiffusionXLPipeline.from_single_file("assets/models/sdxlturbo.safetensors",
+    self.pipeline = StableDiffusionXLPipeline.from_single_file("model/models/sdxlturbo.safetensors",
                                                       config=self.model_config_path,
                                                       local_files_only=True,
                                                       revision="fp16",
@@ -26,7 +26,7 @@ class ImageGenerator():
     return snapshot_download(
       repo_id="stabilityai/sdxl-turbo",
       allow_patterns=["*.json", "**/*.json", "*.txt", "**/*.txt"],
-     local_dir="assets/models/config"
+     local_dir="model/models/config"
     )
 
   def image_generator(self, prompt):
@@ -35,7 +35,7 @@ class ImageGenerator():
                 guidance_scale=0.0
                 ).images[0]
 
-  '''pipeline = StableDiffusionXLPipeline.from_single_file("assets/models/sdxlturbo.safetensors",
+  '''pipeline = StableDiffusionXLPipeline.from_single_file("model/models/sdxlturbo.safetensors",
                                                       config=my_local_config_path,
                                                       local_files_only=True,
                                                       revision="fp16",
