@@ -2,8 +2,10 @@ import gradio as gr
 import torch
 import numpy as np
 from model.bart import BartCaptionModel
-from utils.audio_utils import load_audio, get_audio, STR_CH_FIRST
+from utils.audio_utils import load_audio, get_audio, get_audio2, STR_CH_FIRST
 import config
+
+import librosa 
 
 # Image Generation
 from model.txt2img import ImageGenerator
@@ -13,7 +15,7 @@ generator = ImageGenerator()
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 
 model = BartCaptionModel(max_length = 128)
-pretrained_object = torch.load('assets/models/lpmusiccaps.pth', map_location='cpu')
+pretrained_object = torch.load('model/models/lpmusiccaps.pth', map_location='cpu')
 state_dict = pretrained_object['state_dict']
 model.load_state_dict(state_dict)
 if torch.cuda.is_available():
@@ -23,7 +25,8 @@ model = model.cuda(device)
 model.eval()
 
 def captioning(audio_path):
-    audio_tensor = get_audio(audio_path = audio_path)
+    print(audio_path)
+    audio_tensor = get_audio(audio_path)
     if device is not None:
         audio_tensor = audio_tensor.to(device)
     with torch.no_grad():
@@ -48,3 +51,14 @@ demo = gr.Interface(fn=captioning,
                     cache_examples=False
                     )
 demo.launch(share=True)
+'''with gr.Blocks() as demo:
+    with gr.Row():
+        with gr.Column():
+            input_img = gr.Audio(label="Input", sources="microphone")
+        with gr.Column():
+            output_img = gr.Image(label="Output")
+        input_img.stream(captioning, input_img, output_img, time_limit=0, stream_every=5, concurrency_limit=30)
+
+if __name__ == "__main__":
+
+    demo.launch(share=True)'''

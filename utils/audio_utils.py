@@ -15,8 +15,9 @@ from typing import Tuple
 from pathlib import Path
 
 from torch import from_numpy
+from tensorflow import cast, float16
 
-# import librosa
+import librosa####
 import numpy as np
 import soundfile as sf
 
@@ -119,6 +120,20 @@ def get_audio(audio_path, duration=10, target_sr=16000):
     )
     if len(audio.shape) == 2:
         audio = audio.mean(0, False)  # to mono
+    input_size = int(n_samples)
+    if audio.shape[-1] < input_size:  # pad sequence
+        pad = np.zeros(input_size)
+        pad[: audio.shape[-1]] = audio
+        audio = pad
+    ceil = int(audio.shape[-1] // n_samples)
+    audio = from_numpy(np.stack(np.split(audio[:ceil * n_samples], ceil)).astype('float16'))# 32--> 16
+    return audio
+
+def get_audio2(audio, duration=10, target_sr=16000):
+    n_samples = int(duration * target_sr)
+    audio = librosa.resample((audio[1].astype(float)), orig_sr=audio[0], target_sr=target_sr)
+    #if len(audio.shape) == 2:
+    #    audio = audio.mean(0, False)  # to mono
     input_size = int(n_samples)
     if audio.shape[-1] < input_size:  # pad sequence
         pad = np.zeros(input_size)
