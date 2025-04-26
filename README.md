@@ -1,6 +1,6 @@
 <div align="center" style="display: flex; justify-content: center; align-items: center; text-align: center;">
   <a href="https://github.com/trekar99/musyn" style="margin-right: 20px; text-decoration: none; display: flex; align-items: center;">
-    <img src="https://github.com/user-attachments/assets/d79f3a24-0853-4fae-a90c-5966438b7687" alt="Musyn" width="580">
+    <img src="https://github.com/user-attachments/assets/b7a19a44-37f9-4245-9b43-499e3bdc7025" alt="Musyn" width="580">
   </a>
 </div>
 <div align="center" style="display: flex; justify-content: center; align-items: center; text-align: center;">
