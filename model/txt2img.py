@@ -1,6 +1,6 @@
 from diffusers import StableDiffusionXLPipeline, AutoencoderKL
 from huggingface_hub import snapshot_download
-from torch import float16
+from torch import float16, manual_seed
 
 # TODO download
 #from diffusers import AutoencoderKL
@@ -29,10 +29,12 @@ class ImageGenerator():
      local_dir="model/models/config"
     )
 
-  def image_generator(self, prompt):
+  def image_generator(self, prompt, seed = 123123123):
+    generator =  manual_seed(seed)
     return self.pipeline(prompt=prompt,
                 num_inference_steps=1,
-                guidance_scale=0.0
+                guidance_scale=0.0,
+                generator=generator
                 ).images[0]
 
   '''pipeline = StableDiffusionXLPipeline.from_single_file("model/models/sdxlturbo.safetensors",
