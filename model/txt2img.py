@@ -29,9 +29,9 @@ class ImageGenerator():
      local_dir="model/models/config"
     )
 
-  def image_generator(self, prompt, seed = 123123123):
+  def image_generator(self, prompt, seed = 123123123, inference=""):
     generator =  manual_seed(seed)
-    return self.pipeline(prompt=prompt,
+    return self.pipeline(prompt=prompt + inference,
                 num_inference_steps=1,
                 guidance_scale=0.0,
                 generator=generator
