@@ -91,4 +91,4 @@ with gr.Blocks(title = config.title, css = config.css) as demo:
         btn.click(fn=captioning, inputs=[input_audio, input_cpt, output_cpt], outputs=[output_cpt, output_img, output_audio])
 
 if __name__ == "__main__":
-    demo.launch(share=True, debug=True, favicon_path="/content/musyn/favicon.png", inline=False)
+    demo.launch(share=True, debug=True, favicon_path="./favicon.png", inline=False)
