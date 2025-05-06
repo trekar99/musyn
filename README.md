@@ -35,3 +35,4 @@ This repo contains an implementation of a real-time synesthetic musical co-creat
 - [x] Generate Images in RT. 
 - [ ] Option of 5s audio input.
 - [ ] Improve RT Image Generation.
+- [ ] Publish a demo on a Hugging Face Space
