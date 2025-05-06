@@ -24,7 +24,10 @@ This repo contains an implementation of a real-time synesthetic musical co-creat
 ## Code Structure
 
 ## References
-- Exploring Real-Time Music-to-Image Systems for Creative Inspiration in Music Creation[!https://arxiv.org/html/2407.05584v1#Sx3]
+- [Exploring Real-Time Music-to-Image Systems for Creative Inspiration in Music Creation](https://arxiv.org/html/2407.05584v1#Sx3)
+- [LP-MusicCaps: LLM-Based Pseudo Music Captioning](https://github.com/seungheondoh/lp-music-caps)
+- [ArtSpew - An infinite number of monkeys randomly throwing paint at a canvas](https://github.com/aifartist/ArtSpew/)
+- [SDXLTurbo](https://static1.squarespace.com/static/6213c340453c3f502425776e/t/65663480a92fba51d0e1023f/1701197769659/adversarial_diffusion_distillation.pdf)
 
 ## Next Steps
 - [x] Generate Images in RT. 
