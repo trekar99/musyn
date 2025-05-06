@@ -28,6 +28,7 @@ This repo contains an implementation of a real-time synesthetic musical co-creat
 - [LP-MusicCaps: LLM-Based Pseudo Music Captioning](https://github.com/seungheondoh/lp-music-caps)
 - [ArtSpew - An infinite number of monkeys randomly throwing paint at a canvas](https://github.com/aifartist/ArtSpew/)
 - [SDXLTurbo](https://static1.squarespace.com/static/6213c340453c3f502425776e/t/65663480a92fba51d0e1023f/1701197769659/adversarial_diffusion_distillation.pdf)
+- [Ultimate guide to optimizing Stable Diffusion XL](https://www.felixsanz.dev/articles/ultimate-guide-to-optimizing-stable-diffusion-xl)
 
 ## Next Steps
 - [x] Generate Images in RT. 
