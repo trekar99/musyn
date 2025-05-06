@@ -12,3 +12,20 @@
 ## Overview
 This repo contains an implementation of a real-time synesthetic musical co-creation system, that is, instantaneous generation of images based on the music being played. 
 
+## Installation
+
+## Usage
+
+## Musyn Architecture
+
+## Code Structure
+
+## References
+- Exploring Real-Time Music-to-Image Systems for Creative Inspiration in Music Creation[!https://arxiv.org/html/2407.05584v1#Sx3]
+
+## Next Steps
+- [x] Generate Images in RT. 
+- [] Option of 5s audio input.
+- [] Improve RT Image Generation.
+- [] 
+- 
