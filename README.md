@@ -29,6 +29,7 @@ This repo contains an implementation of a real-time synesthetic musical co-creat
 - [ArtSpew - An infinite number of monkeys randomly throwing paint at a canvas](https://github.com/aifartist/ArtSpew/)
 - [SDXLTurbo](https://static1.squarespace.com/static/6213c340453c3f502425776e/t/65663480a92fba51d0e1023f/1701197769659/adversarial_diffusion_distillation.pdf)
 - [Ultimate guide to optimizing Stable Diffusion XL](https://www.felixsanz.dev/articles/ultimate-guide-to-optimizing-stable-diffusion-xl)
+- [Real time prompting with SDXL Turbo and ComfyUI running locally](https://www.reddit.com/r/StableDiffusion/comments/1869cnk/real_time_prompting_with_sdxl_turbo_and_comfyui/)
 
 ## Next Steps
 - [x] Generate Images in RT. 
