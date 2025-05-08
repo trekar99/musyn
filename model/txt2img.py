@@ -19,7 +19,7 @@ class ImageGenerator():
                                                       revision="fp16",
                                                       variant="fp16",
                                                       torch_dtype=float16,
-                                                      vae=vae
+                                                      vae=self.vae
                                                       )
     
     self.pipeline.set_progress_bar_config(disable=True)
