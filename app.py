@@ -51,7 +51,7 @@ def hello(profile: gr.OAuthProfile | None) -> str:
 with gr.Blocks(title = config.title, css = config.css) as demo:
     gr.Markdown(config.web_title, elem_id="intro")
     gr.Markdown(config.description, elem_id="intro")
-    gr.LoginButton(size="md", icon=None)
+    #gr.LoginButton(size="md", icon=None)
 
     #prueba = gr.Markdown(elem_id="elemento")
     #demo.load(list_organizations, None, prueba)
