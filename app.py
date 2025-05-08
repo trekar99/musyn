@@ -19,10 +19,11 @@ model.load_state_dict(state_dict)
 if torch.cuda.is_available():
     torch.cuda.set_device(device)
     generator.pipeline.to(device)
+    generator.vae.to(device)
 model = model.cuda(device)
 model.eval()
 
-async def captioning(audio, prompt, last_inf):
+def captioning(audio, prompt, last_inf):
     audio_tensor = get_audio(audio) if isinstance(audio, str) else preprocess_audio(audio, 32000)
     if (audio_tensor.shape[1] == 160000):
       if device is not None:
