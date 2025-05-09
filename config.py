@@ -9,8 +9,9 @@ description = """
 
 examples = [
             ["Brasilian Beach, Rio de Janeiro"], 
-            ["Gnawa Village, Morocco"]
-          ],
+            ["Gnawa Village, Morocco"],
+            ["Cyberpunk, Future"]
+          ]
 
 css = """ 
       #container{
