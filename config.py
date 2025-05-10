@@ -25,3 +25,7 @@ css = """
       }"""
 
 musiccaps_model = 'model/models/lpmusiccaps.pth'
+
+# Aspect Ratio
+width = [512, 1024, 1080, 1920]
+height = [512, 1024, 1080, 1920]
