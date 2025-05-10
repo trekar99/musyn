@@ -31,7 +31,7 @@ class ImageGenerator():
      local_dir="model/models/config"
     )
 
-  def image_generator(self, prompt, inference="", width=512, height=512):
+  def image_generator(self, prompt, inference="", width=512, heigth=512):
     #generator = manual_seed(randint(0, 9007199254740991))
     return self.pipeline(prompt=prompt + inference,
                 num_inference_steps=1,
