@@ -31,12 +31,13 @@ class ImageGenerator():
      local_dir="model/models/config"
     )
 
-  def image_generator(self, prompt, inference=""):
+  def image_generator(self, prompt, inference="", width=512, height=512):
     #generator = manual_seed(randint(0, 9007199254740991))
     return self.pipeline(prompt=prompt + inference,
                 num_inference_steps=1,
                 guidance_scale=0.0,
-                #generator=generator
+                width=width,
+                heigth=heigth
                 ).images[0]
 
   '''pipeline = StableDiffusionXLPipeline.from_single_file("model/models/sdxlturbo.safetensors",
