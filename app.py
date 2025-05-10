@@ -1,27 +1,18 @@
 import gradio as gr
 import torch
 import numpy as np
-from model.bart import BartCaptionModel
 from utils.audio_utils import get_audio, preprocess_audio
 import config
 from model.txt2img import ImageGenerator
+from model.music2txt import MusicCapsGenerator
 
 # Image Generation
 generator = ImageGenerator()
 
 # Prompt Generator
-device = "cuda:0" if torch.cuda.is_available() else "cpu"
+model = MusicCapsGenerator()
 
-model = BartCaptionModel(max_length = 128)
-pretrained_object = torch.load('model/models/lpmusiccaps.pth', map_location='cpu')
-state_dict = pretrained_object['state_dict']
-model.load_state_dict(state_dict)
-if torch.cuda.is_available():
-    torch.cuda.set_device(device)
-    generator.pipeline.to(device)
-    generator.vae.to(device)
-model = model.cuda(device)
-model.eval()
+device = "cuda:0" if torch.cuda.is_available() else "cpu"
 
 def captioning(audio, last_inf):
     audio_tensor = get_audio(audio) if isinstance(audio, str) else preprocess_audio(audio, 16000)
@@ -99,4 +90,13 @@ with gr.Blocks(title = config.title, css = config.css) as demo:
       #timer2.tick(generator.image_generator, [input_caption2, output_caption2], output_img2)
 
 if __name__ == "__main__":
+    try:
+      torch.cuda.set_device(device)
+      generator.pipeline.to(device)
+      generator.vae.to(device)
+      model.to(device)
+    except:
+      print("ERROR: Run it in a CUDA device.")
+      exit()
+    
     demo.launch(share=True, debug=True, favicon_path="./favicon.png", inline=False, inbrowser=True,)# auth=["admin","admin"])
