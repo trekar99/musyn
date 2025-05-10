@@ -23,3 +23,5 @@ css = """
           text-align: center;
           margin: 0 auto;
       }"""
+
+musiccaps_model = 'model/models/lpmusiccaps.pt'
