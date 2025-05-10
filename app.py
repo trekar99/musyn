@@ -1,7 +1,7 @@
 import gradio as gr
 import torch
 import numpy as np
-from utils.audio_utils import captioning
+from utils.audio_utils import get_audio, preprocess_audio
 import config
 from model.txt2img import ImageGenerator
 from model.music2txt import MusicCapsGenerator
@@ -13,6 +13,25 @@ generator = ImageGenerator()
 model = MusicCapsGenerator()
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
+
+def captioning(audio, last_inf):
+    audio_tensor = get_audio(audio) if isinstance(audio, str) else preprocess_audio(audio, 16000)
+    if (audio_tensor.shape[1] == 160000):
+      if device is not None:
+          audio_tensor = audio_tensor.to(device)
+      with torch.no_grad():
+          output = model.generate(
+              samples=audio_tensor,
+              num_beams=5,
+          )
+      inference = ""
+      number_of_chunks = range(audio_tensor.shape[0])
+      for chunk, text in zip(number_of_chunks, output):
+          inference += f"{text} \n \n"
+    else:
+      inference = last_inf
+
+    return inference, audio
 
 with gr.Blocks(title = config.title, css = config.css) as demo:
     gr.Markdown(config.web_title, elem_id="intro")
