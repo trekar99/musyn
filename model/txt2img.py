@@ -1,7 +1,7 @@
 from diffusers import StableDiffusionXLPipeline, AutoencoderTiny
 from huggingface_hub import snapshot_download
-from torch import float16#, manual_seed
-#from random import randint
+from torch import float16
+import config 
 
 class ImageGenerator():
   def __init__(self):
@@ -13,7 +13,7 @@ class ImageGenerator():
                                       torch_dtype=float16,
                                     )
     
-    self.pipeline = StableDiffusionXLPipeline.from_single_file("model/models/sdxlturbo.safetensors",
+    self.pipeline = StableDiffusionXLPipeline.from_single_file(config.sdxlturbo_model,
                                                       config=self.model_config_path,
                                                       local_files_only=True,
                                                       revision="fp16",
@@ -32,17 +32,9 @@ class ImageGenerator():
     )
 
   def image_generator(self, prompt, inference="", width=512, height=512):
-    #generator = manual_seed(randint(0, 9007199254740991))
     return self.pipeline(prompt=prompt + inference,
                 num_inference_steps=1,
                 guidance_scale=0.0,
                 width=width,
                 height=height
                 ).images[0]
-
-  '''pipeline = StableDiffusionXLPipeline.from_single_file("model/models/sdxlturbo.safetensors",
-                                                      config=my_local_config_path,
-                                                      local_files_only=True,
-                                                      revision="fp16",
-                                                      variant="fp16",
-                                                      torch_dtype=torch.float16)'''
