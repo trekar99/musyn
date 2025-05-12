@@ -11,7 +11,8 @@ examples = [
             ["Brasilian Beach, Rio de Janeiro"], 
             ["Gnawa Village, Morocco"],
             ["Cyberpunk, Future"],
-            ["Fairy Tales, Forest"]
+            ["Fairy Tales, Forest"],
+            ["End of the World, Apocalypsis]
           ]
 
 css = """ 
