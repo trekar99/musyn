@@ -12,7 +12,7 @@ examples = [
             ["Gnawa Village, Morocco"],
             ["Cyberpunk, Future"],
             ["Fairy Tales, Forest"],
-            ["End of the World, Apocalypsis]
+            ["End of the World, Apocalypsis"]
           ]
 
 css = """ 
