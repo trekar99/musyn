@@ -10,7 +10,8 @@ description = """
 examples = [
             ["Brasilian Beach, Rio de Janeiro"], 
             ["Gnawa Village, Morocco"],
-            ["Cyberpunk, Future"]
+            ["Cyberpunk, Future"],
+            ["Fairy Tales, Forest"]
           ]
 
 css = """ 
@@ -24,7 +25,9 @@ css = """
           margin: 0 auto;
       }"""
 
+# Models Path
 musiccaps_model = 'model/models/lpmusiccaps.pth'
+sdxlturbo_model = 'model/models/sdxlturbo.safetensors'
 
 # Aspect Ratio
 width = [512, 1024, 1080, 1920]
