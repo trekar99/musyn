@@ -99,17 +99,20 @@ def load_audio(
     else:
         raise ValueError('Given audio is too short!')
     return src, sr
-
-    # if src.ndim == 1:
-    #     src = np.expand_dims(src, axis=0)
-    # # now always 2d and channels_first
-
-    # if ch_format == STR_CH_FIRST:
-    #     return src, sr
-    # else:
-    #     return src.T, sr
   
 def get_audio(audio_path, duration=10, target_sr=16000):
+    """
+    Preprocessing audio data for LPMusicCaps Model input (designed for file input).
+    Returns audio data prepared to the model.
+
+    Args:
+        audio_path: path of audio input
+        duration: duration for audio splitting
+        target_sr: target sample rate
+
+    Returns:
+        data: audio data.
+    """
     n_samples = int(duration * target_sr)
     audio, sr = load_audio(
         path= audio_path,
@@ -125,35 +128,27 @@ def get_audio(audio_path, duration=10, target_sr=16000):
         pad[: audio.shape[-1]] = audio
         audio = pad
     ceil = int(audio.shape[-1] // n_samples)
-    audio = from_numpy(np.stack(np.split(audio[:ceil * n_samples], ceil)).astype('float16'))# 32--> 16
+    audio = from_numpy(np.stack(np.split(audio[:ceil * n_samples], ceil)).astype('float16')) # 32--> 16
     return audio
 
 def preprocess_audio(audio, target_sr = 16000):
+    """
+    Preprocessing audio data for LPMusicCaps Model input (designed for microphone input).
+    Returns audio data prepared to the model.
+
+    Args:
+        audio: audio tuple input (data, sr)
+        target_sr: target sample rate
+
+    Returns:
+        data: audio data.
+    """
     data = audio[1]
  
     if len(data.shape) == 2:
       data = data.sum(axis = 1) / 2  # to mono
     
-    data = resample(data, orig_sr=audio[0], target_sr = target_sr)#, res_type="kaiser_fast")
-    data = data.astype(np.float16, order='C') / 32768.0 # Normalization
-    data = from_numpy(data).unsqueeze(0) # 32--> 16
+    data = resample(data, orig_sr=audio[0], target_sr = target_sr) #, res_type="kaiser_fast") # Faster resample method.
+    data = data.astype(np.float16, order='C') / 32768.0 # Normalization to float16
+    data = from_numpy(data).unsqueeze(0) # Transposed matrix for model input
     return data
-
-def captioning(audio, last_inf):
-    audio_tensor = get_audio(audio) if isinstance(audio, str) else preprocess_audio(audio, 16000)
-    if (audio_tensor.shape[1] == 160000):
-      if device is not None:
-          audio_tensor = audio_tensor.to(device)
-      with torch.no_grad():
-          output = model.generate(
-              samples=audio_tensor,
-              num_beams=5,
-          )
-      inference = ""
-      number_of_chunks = range(audio_tensor.shape[0])
-      for chunk, text in zip(number_of_chunks, output):
-          inference += f"{text} \n \n"
-    else:
-      inference = last_inf
-
-    return inference, audio
