@@ -29,8 +29,8 @@ MUSYN is an innovative system designed for real-time musical co-creation, focusi
 ## Usage
 
 1. **Run the app**  
-   ```bash
-   ./start.sh
+   ```python
+   python app.py
    ```
 2. **Open the web interface**  
    The app launches a Gradio interface in your browser.
